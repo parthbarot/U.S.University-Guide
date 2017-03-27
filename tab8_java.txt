@@ -1,0 +1,123 @@
+package university_guide.com.university_guide;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+/**
+ * Created by dell on 11/10/2016.
+ */
+
+public class tab8 extends ListFragment {
+    String[] universities8={"Temple University, PA\n" ,
+            "City College of the City of New York \n" ,
+            "Northeastern Illinois University \n" ,
+            "University of Detroit Mercy \n" ,
+            "University of Arkansas Little Rock \n" ,
+            "California State University, Fresno\n" ,
+            "Alabama A & M University\n" ,
+            "Widener University, Pennsylvania \n" ,
+            "Alcorn State University \n" ,
+            "Gannon University \n" ,
+            "University of Findlay-Ohio \n" ,
+            "San Diego State University, California \n" ,
+            "Ball State University\n" ,
+            "Northwestern Polytechnic University\n" ,
+            "Jacksonville State University \n" ,
+            "Saint Joseph University \n" ,
+            "Chapman University \n" ,
+            "Kent State University\n" ,
+            "Ferris State University\n" ,
+            "University of New Haven, CT \n" ,
+            "Farleigh Dickinson University, New Jersey \n" ,
+            "State University of New York, Albany \n" ,
+            "College of William & Mary \n" ,
+            "East Tennessee State University\n" ,
+            "Southwest Texas State University, San Marcos\n" ,
+            "DePaul University \n" ,
+            "Mc Neese State University\n" ,
+            "Oakland University\n" ,
+            "Sam Houston State University \n" ,
+            "San Jose state University\n" ,
+            "William Patterson University \n" ,
+            "Western Carolina University \n" ,
+            "University of Central Oklahoma \n" ,
+            "Widener University\n" ,
+            "University of St Thomas, MN \n" ,
+            "Western Illinois university \n" ,
+            "Bowling Green State University, Ohio \n" ,
+            "Delaware State University\n" ,
+            "State University of New York, New Paltz \n" ,
+            "Central Michigan University \n" ,
+            "University of Southern Mississippi \n" ,
+            "Indian University South Bend\n" ,
+            "Saint Mary’s University San Antonio\n" ,
+            "Shippensburg University, PA \n" ,
+            "East Tennessee State University \n" ,
+            "University of Texas, Pan America \n" ,
+            "Jackson State University \n" ,
+            "Oklahoma City University\n" ,
+            "Frostburg State University \n" ,
+            "La Salle University, PA \n" ,
+            "Alfred University \n" ,
+            "Monmouth University-New Jersey \n" ,
+            "Southern New Hampshire University\n" ,
+            "Roosevelt University Chicago \n" ,
+            "Drake university \n" ,
+            "Shippensburg University of Pennsylvania\n" ,
+            "Duquesne University\n" ,
+            "Georgia College & State University\n" ,
+            "Georgia Southern University\n" ,
+            "Kennesaw State University\n",
+            "Long Island University\n" ,
+            "Loyola University Chicago\n" ,
+            "Northern Kentucky University \n" ,
+            "Lawrence Tech University \n" ,
+            "Clark Atlanta University\n" ,
+            "California State University, Northridge \n" ,
+            "Catholic University of America, Washington \n" ,
+            "Ohio Dominican College (University), Ohio \n" ,
+            "Ferris State University, Michigan \n" ,
+            "Fitchburg State University, MA \n" ,
+            "Hawaii Pacific University, Hawaii \n" ,
+            "Northwood University, Michigan \n" ,
+            "Johnson and Wales University, RI\n" ,
+            "Governors State University, Parkway IL \n" ,
+            "Troy State University, Alabama \n" ,
+            "Stevens Institute of Technology\n" ,
+            "Florida Atlantic University, Boca Raton\n" ,
+            "Golden Gate University\n" ,
+            "Howard University " ,
+            "Dominican University "};
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab3, container, false);
+
+        //create adapter and set it to listview
+        ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, universities8);
+        setListAdapter(adapter);
+
+        return rootView;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        // Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+        String pos = String.valueOf(getListAdapter().getItemId(position));
+
+        Log.e("possssssss", "" + pos);
+        Intent i = new Intent(getActivity(), Webview8.class);
+        i.putExtra("key", pos);
+        startActivity(i);
+    }
+
+}

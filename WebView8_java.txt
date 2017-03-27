@@ -1,0 +1,297 @@
+package university_guide.com.university_guide;
+
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
+/**
+ * Created by dell on 11/8/2016.
+ */
+
+public class Webview8 extends AppCompatActivity implements View.OnClickListener {
+    WebView w8;
+    String urlid;
+    private LinearLayout mlLayoutRequestError = null;
+    private Handler mhErrorLayoutHide = null;
+
+    private boolean mbErrorOccured = false;
+    private boolean mbReloadPressed = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.webview8);
+        ((Button) findViewById(R.id.btnRetry)).setOnClickListener(this);
+        mlLayoutRequestError = (LinearLayout) findViewById(R.id.lLayoutRequestError);
+        mhErrorLayoutHide = getErrorLayoutHideHandler();
+        w8 = (WebView) findViewById(R.id.w8);
+        w8.getSettings().setJavaScriptEnabled(true);
+        urlid = String.valueOf(getIntent().getStringExtra("key"));
+        w8.setWebViewClient(new MyWebViewClient());
+        WebSettings settings = w8.getSettings();
+        settings.setJavaScriptEnabled(true);
+        w8.setWebChromeClient(getChromeClient());
+        // WebView.loadUrl(URL);
+
+        Log.e("key", "" + urlid);
+        if (urlid.equals("0")) {
+
+            w8.loadUrl("http://www.temple.edu/");
+        } else if (urlid.equals("1")) {
+            w8.loadUrl("http://www.cuny.edu");
+        }
+        else if (urlid.equals("2")){w8.loadUrl("http:www.neiu.edu/");}
+        else if (urlid.equals("3")){w8.loadUrl("http:www.udmercy.edu");}
+        else if (urlid.equals("4")){w8.loadUrl("http:www.ualr.edu/");}
+        else if (urlid.equals("5")){w8.loadUrl("http:www.csufresno.edu/");}
+        else if (urlid.equals("6")){w8.loadUrl("http:www.aamu.edu/");}
+        else if (urlid.equals("7")){w8.loadUrl("http:www.widener.edu/");}
+        else if (urlid.equals("8")){w8.loadUrl("http:www.alcorn.edu/");}
+        else if (urlid.equals("9")){w8.loadUrl("http:www.gannon.edu/");}
+        else if (urlid.equals("10")){w8.loadUrl("http:www.findlay.edu/");}
+        else if (urlid.equals("11")){w8.loadUrl("http:www.sdsu.edu/");}
+        else if (urlid.equals("12")){w8.loadUrl("http:www.bsu.edu/");}
+        else if (urlid.equals("13")){w8.loadUrl("http:www.npu.edu/");}
+        else if (urlid.equals("14")){w8.loadUrl("http:www.jsu.edu/");}
+        else if (urlid.equals("15")){w8.loadUrl("http:www.sju.edu/");}
+        else if (urlid.equals("16")){w8.loadUrl("http:www.chapman.edu/");}
+        else if (urlid.equals("17")){w8.loadUrl("http:www.kent.edu/");}
+        else if (urlid.equals("18")){w8.loadUrl("http:www.ferris.edu/");}
+        else if (urlid.equals("19")){w8.loadUrl("http:www.newhaven.edu/");}
+        else if (urlid.equals("20")){w8.loadUrl("http:www.fdu.edu/");}
+        else if (urlid.equals("21")){w8.loadUrl("http:www.albany.edu/");}
+        else if (urlid.equals("22")){w8.loadUrl("http:www.wm.edu/");}
+        else if (urlid.equals("23")){w8.loadUrl("http:www.etsu.edu/");}
+        else if (urlid.equals("24")){w8.loadUrl("http:www.swt.edu/");}
+        else if (urlid.equals("25")){w8.loadUrl("http:www.depaul.edu/");}
+        else if (urlid.equals("26")){w8.loadUrl("http:www.mcneese.edu/");}
+        else if (urlid.equals("27")){w8.loadUrl("http:www.oakland.edu/");}
+        else if (urlid.equals("28")){w8.loadUrl("http:www.shsu.edu/");}
+        else if (urlid.equals("29")){w8.loadUrl("http:www.sjsu.edu/");}
+        else if (urlid.equals("30")){w8.loadUrl("http:www.wpunj.edu/");}
+        else if (urlid.equals("31")){w8.loadUrl("http:www.wcu.edu/");}
+        else if (urlid.equals("32")){w8.loadUrl("http:www.ucok.edu/");}
+        else if (urlid.equals("33")){w8.loadUrl("http:www.widener.edu/");}
+        else if (urlid.equals("34")){w8.loadUrl("http:www.stthomas.edu/");}
+        else if (urlid.equals("35")){w8.loadUrl("http:www.wiu.edu/");}
+        else if (urlid.equals("36")){w8.loadUrl("http:www.bgsu.edu/");}
+        else if (urlid.equals("37")){w8.loadUrl("http:www.desu.edu/");}
+        else if (urlid.equals("38")){w8.loadUrl("http:www.newpaltz.edu/");}
+        else if (urlid.equals("39")){w8.loadUrl("http:www.cmich.edu/");}
+        else if (urlid.equals("40")){w8.loadUrl("http:www.usm.edu/");}
+        else if (urlid.equals("41")){w8.loadUrl("http:www.iusb.edu/");}
+        else if (urlid.equals("42")){w8.loadUrl("http:www.stmarytx.edu/");}
+        else if (urlid.equals("43")){w8.loadUrl("http:www.ship.edu/");}
+        else if (urlid.equals("44")){w8.loadUrl("http:www.etsu.edu/");}
+        else if (urlid.equals("45")){w8.loadUrl("http:www.panam.edu/");}
+        else if (urlid.equals("46")){w8.loadUrl("http:www.jsums.edu/");}
+        else if (urlid.equals("47")){w8.loadUrl("http:www.ocu.edu/");}
+        else if (urlid.equals("48")){w8.loadUrl("http:www.frostburg.edu/");}
+        else if (urlid.equals("49")){w8.loadUrl("http:www.lasalle.edu/");}
+        else if (urlid.equals("50")){w8.loadUrl("http:www.alfred.edu/");}
+        else if (urlid.equals("51")){w8.loadUrl("http:www.monmouth.edu/");}
+        else if (urlid.equals("52")){w8.loadUrl("http:www.snhu.edu/");}
+        else if (urlid.equals("53")){w8.loadUrl("http:www.roosevelt.edu/");}
+        else if (urlid.equals("54")){w8.loadUrl("http:www.drake.edu/");}
+        else if (urlid.equals("55")){w8.loadUrl("http:www.ship.edu/");}
+        else if (urlid.equals("56")){w8.loadUrl("http:www.duq.edu/");}
+        else if (urlid.equals("57")){w8.loadUrl("http:www.gcsu.edu/");}
+        else if (urlid.equals("58")){w8.loadUrl("http:www.georgiasouthern.edu/");}
+        else if (urlid.equals("59")){w8.loadUrl("http:www.kennesaw.edu/");}
+        else if (urlid.equals("60")){w8.loadUrl("http:www.liu.edu/");}
+        else if (urlid.equals("61")){w8.loadUrl("http:www.luc.edu/");}
+        else if (urlid.equals("62")){w8.loadUrl("http:www.nku.edu/");}
+        else if (urlid.equals("63")){w8.loadUrl("http:www.ltu.edu/");}
+        else if (urlid.equals("64")){w8.loadUrl("http:www.cau.edu/");}
+        else if (urlid.equals("65")){w8.loadUrl("http:www.csun.edu/");}
+        else if (urlid.equals("66")){w8.loadUrl("http:www.cua.edu/");}
+        else if (urlid.equals("67")){w8.loadUrl("http:www.ohiodominican.edu/");}
+        else if (urlid.equals("68")){w8.loadUrl("http:www.ferris.edu/");}
+        else if (urlid.equals("69")){w8.loadUrl("http:www.fsc.edu/");}
+        else if (urlid.equals("70")){w8.loadUrl("http:www.hpu.edu/");}
+        else if (urlid.equals("71")){w8.loadUrl("http:www.northwood.edu/");}
+        else if (urlid.equals("72")){w8.loadUrl("http:www.jwu.edu/");}
+        else if (urlid.equals("73")){w8.loadUrl("http:www.govst.edu/");}
+        else if (urlid.equals("74")){w8.loadUrl("http:www.troyst.edu/");}
+        else if (urlid.equals("75")){w8.loadUrl("http:www.stevens-tech.edu/");}
+        else if (urlid.equals("76")){w8.loadUrl("http:www.fau.edu/");}
+        else if (urlid.equals("77")){w8.loadUrl("http:www.ggu.edu/");}
+        else if (urlid.equals("78")){w8.loadUrl("http:www.howard.edu/");}
+        else if (urlid.equals("79")){w8.loadUrl("http:www.dom.edu/");}
+
+    }
+
+    private WebChromeClient getChromeClient() {
+        final ProgressDialog progressDialog = new ProgressDialog(Webview8.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+
+        return new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+            }
+        };
+    }
+
+    private Handler getErrorLayoutHideHandler() {
+        return new Handler() {
+            public void close() {
+
+            }
+
+            public void flush() {
+
+            }
+
+            public void publish(LogRecord record) {
+
+            }
+
+            //@Override
+            private void handleMessage(Message msg) {
+                mlLayoutRequestError.setVisibility(View.GONE);
+                // super.handleMessage(msg);
+            }
+        };
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (urlid.equals("0")) {
+
+            w8.loadUrl("http://www.temple.edu/");
+        } else if (urlid.equals("1")) {
+            w8.loadUrl("http://www.cuny.edu");
+        }else if (urlid.equals("2")){w8.loadUrl("http:www.neiu.edu/");}
+        else if (urlid.equals("3")){w8.loadUrl("http:www.udmercy.edu");}
+        else if (urlid.equals("4")){w8.loadUrl("http:www.ualr.edu/");}
+        else if (urlid.equals("5")){w8.loadUrl("http:www.csufresno.edu/");}
+        else if (urlid.equals("6")){w8.loadUrl("http:www.aamu.edu/");}
+        else if (urlid.equals("7")){w8.loadUrl("http:www.widener.edu/");}
+        else if (urlid.equals("8")){w8.loadUrl("http:www.alcorn.edu/");}
+        else if (urlid.equals("9")){w8.loadUrl("http:www.gannon.edu/");}
+        else if (urlid.equals("10")){w8.loadUrl("http:www.findlay.edu/");}
+        else if (urlid.equals("11")){w8.loadUrl("http:www.sdsu.edu/");}
+        else if (urlid.equals("12")){w8.loadUrl("http:www.bsu.edu/");}
+        else if (urlid.equals("13")){w8.loadUrl("http:www.npu.edu/");}
+        else if (urlid.equals("14")){w8.loadUrl("http:www.jsu.edu/");}
+        else if (urlid.equals("15")){w8.loadUrl("http:www.sju.edu/");}
+        else if (urlid.equals("16")){w8.loadUrl("http:www.chapman.edu/");}
+        else if (urlid.equals("17")){w8.loadUrl("http:www.kent.edu/");}
+        else if (urlid.equals("18")){w8.loadUrl("http:www.ferris.edu/");}
+        else if (urlid.equals("19")){w8.loadUrl("http:www.newhaven.edu/");}
+        else if (urlid.equals("20")){w8.loadUrl("http:www.fdu.edu/");}
+        else if (urlid.equals("21")){w8.loadUrl("http:www.albany.edu/");}
+        else if (urlid.equals("22")){w8.loadUrl("http:www.wm.edu/");}
+        else if (urlid.equals("23")){w8.loadUrl("http:www.etsu.edu/");}
+        else if (urlid.equals("24")){w8.loadUrl("http:www.swt.edu/");}
+        else if (urlid.equals("25")){w8.loadUrl("http:www.depaul.edu/");}
+        else if (urlid.equals("26")){w8.loadUrl("http:www.mcneese.edu/");}
+        else if (urlid.equals("27")){w8.loadUrl("http:www.oakland.edu/");}
+        else if (urlid.equals("28")){w8.loadUrl("http:www.shsu.edu/");}
+        else if (urlid.equals("29")){w8.loadUrl("http:www.sjsu.edu/");}
+        else if (urlid.equals("30")){w8.loadUrl("http:www.wpunj.edu/");}
+        else if (urlid.equals("31")){w8.loadUrl("http:www.wcu.edu/");}
+        else if (urlid.equals("32")){w8.loadUrl("http:www.ucok.edu/");}
+        else if (urlid.equals("33")){w8.loadUrl("http:www.widener.edu/");}
+        else if (urlid.equals("34")){w8.loadUrl("http:www.stthomas.edu/");}
+        else if (urlid.equals("35")){w8.loadUrl("http:www.wiu.edu/");}
+        else if (urlid.equals("36")){w8.loadUrl("http:www.bgsu.edu/");}
+        else if (urlid.equals("37")){w8.loadUrl("http:www.desu.edu/");}
+        else if (urlid.equals("38")){w8.loadUrl("http:www.newpaltz.edu/");}
+        else if (urlid.equals("39")){w8.loadUrl("http:www.cmich.edu/");}
+        else if (urlid.equals("40")){w8.loadUrl("http:www.usm.edu/");}
+        else if (urlid.equals("41")){w8.loadUrl("http:www.iusb.edu/");}
+        else if (urlid.equals("42")){w8.loadUrl("http:www.stmarytx.edu/");}
+        else if (urlid.equals("43")){w8.loadUrl("http:www.ship.edu/");}
+        else if (urlid.equals("44")){w8.loadUrl("http:www.etsu.edu/");}
+        else if (urlid.equals("45")){w8.loadUrl("http:www.panam.edu/");}
+        else if (urlid.equals("46")){w8.loadUrl("http:www.jsums.edu/");}
+        else if (urlid.equals("47")){w8.loadUrl("http:www.ocu.edu/");}
+        else if (urlid.equals("48")){w8.loadUrl("http:www.frostburg.edu/");}
+        else if (urlid.equals("49")){w8.loadUrl("http:www.lasalle.edu/");}
+        else if (urlid.equals("50")){w8.loadUrl("http:www.alfred.edu/");}
+        else if (urlid.equals("51")){w8.loadUrl("http:www.monmouth.edu/");}
+        else if (urlid.equals("52")){w8.loadUrl("http:www.snhu.edu/");}
+        else if (urlid.equals("53")){w8.loadUrl("http:www.roosevelt.edu/");}
+        else if (urlid.equals("54")){w8.loadUrl("http:www.drake.edu/");}
+        else if (urlid.equals("55")){w8.loadUrl("http:www.ship.edu/");}
+        else if (urlid.equals("56")){w8.loadUrl("http:www.duq.edu/");}
+        else if (urlid.equals("57")){w8.loadUrl("http:www.gcsu.edu/");}
+        else if (urlid.equals("58")){w8.loadUrl("http:www.georgiasouthern.edu/");}
+        else if (urlid.equals("59")){w8.loadUrl("http:www.kennesaw.edu/");}
+        else if (urlid.equals("60")){w8.loadUrl("http:www.liu.edu/");}
+        else if (urlid.equals("61")){w8.loadUrl("http:www.luc.edu/");}
+        else if (urlid.equals("62")){w8.loadUrl("http:www.nku.edu/");}
+        else if (urlid.equals("63")){w8.loadUrl("http:www.ltu.edu/");}
+        else if (urlid.equals("64")){w8.loadUrl("http:www.cau.edu/");}
+        else if (urlid.equals("65")){w8.loadUrl("http:www.csun.edu/");}
+        else if (urlid.equals("66")){w8.loadUrl("http:www.cua.edu/");}
+        else if (urlid.equals("67")){w8.loadUrl("http:www.ohiodominican.edu/");}
+        else if (urlid.equals("68")){w8.loadUrl("http:www.ferris.edu/");}
+        else if (urlid.equals("69")){w8.loadUrl("http:www.fsc.edu/");}
+        else if (urlid.equals("70")){w8.loadUrl("http:www.hpu.edu/");}
+        else if (urlid.equals("71")){w8.loadUrl("http:www.northwood.edu/");}
+        else if (urlid.equals("72")){w8.loadUrl("http:www.jwu.edu/");}
+        else if (urlid.equals("73")){w8.loadUrl("http:www.govst.edu/");}
+        else if (urlid.equals("74")){w8.loadUrl("http:www.troyst.edu/");}
+        else if (urlid.equals("75")){w8.loadUrl("http:www.stevens-tech.edu/");}
+        else if (urlid.equals("76")){w8.loadUrl("http:www.fau.edu/");}
+        else if (urlid.equals("77")){w8.loadUrl("http:www.ggu.edu/");}
+        else if (urlid.equals("78")){w8.loadUrl("http:www.howard.edu/");}
+        else if (urlid.equals("79")){w8.loadUrl("http:www.dom.edu/");}
+
+
+
+
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String urlid) {
+            return super.shouldOverrideUrlLoading(view, urlid);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String urlid, Bitmap favicon) {
+            super.onPageStarted(view, urlid, favicon);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String urlid) {
+            super.onLoadResource(view, urlid);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String urlid) {
+            if (mbErrorOccured == false && mbReloadPressed) {
+                hideErrorLayout();
+                mbReloadPressed = false;
+            }
+
+            super.onPageFinished(view, urlid);
+        }
+
+        private void hideErrorLayout() {
+            //mhErrorLayoutHide.sendEmptyMessageDelayed(10000, 200);
+        }
+    }
+
+}

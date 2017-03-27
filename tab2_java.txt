@@ -1,0 +1,53 @@
+package university_guide.com.university_guide;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.List;
+
+/**
+ * Created by dell on 11/8/2016.
+ */
+
+public class tab2 extends ListFragment {
+
+    String[] universities2={"Arizona State University","Brown university (RI)","Case Western Reserve University","Columbia University","Dartmouth College, NH","Duke University"
+    ,"Georgia Institute of Technology","Iowa State University","John Hopkins University","North Carolina State University","Northwestern University (IL)","Ohio State University"
+    ,"Pennsylvania State University","Princeton University","Purdue University –West Lafayette","Rice University","Rutgers, State Univ of NJ, New Brunswick","Texas A & M College Station"
+    ,"University of California- Santa Barbara","University of Iowa","University of Minnesota","University of Pennsylvania","University of Pittsburgh","University of Rochester",
+    "University of Virginia","University of Washington","Virginia poly Tech","Yale University"};
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab2, container, false);
+
+        //create adapter and set it to listview
+        ListAdapter adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,universities2);
+        setListAdapter(adapter);
+
+        return rootView;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+       // Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+        String pos = String.valueOf(getListAdapter().getItemId(position));
+
+        Log.e("possssssss",""+pos);
+        Intent i = new Intent(getActivity(),Webview2.class);
+        i.putExtra("key",pos);
+        startActivity(i);
+    }
+
+}

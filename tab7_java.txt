@@ -1,0 +1,87 @@
+package university_guide.com.university_guide;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+/**
+ * Created by dell on 11/10/2016.
+ */
+
+public class tab7 extends ListFragment {
+    String[] universities7={"Arkansas State University" ,
+            "Ball State University" ,
+            "Boise State university, Idaho" ,
+            "Bradley University" ,
+            "California State University, Chico" ,
+            "Cleveland State University" ,
+            "Colorado Technical University, Colorado Springs" ,
+            "Columbus State University" ,
+            "Dakota State University" ,
+            "Eastern Michigan University" ,
+            "Eastern Washington University" ,
+            "Florida International university" ,
+            "Illinois State University, Normal",
+            "Lamar University" ,
+            "Marquette University" ,
+            "Minnesota State University, Mankato" ,
+            "Montana State University, Bozeman" ,
+            "New Mexico Institute of Mining &Tech." ,
+            "New York Institute of Technology" ,
+            "North Carolina Agricultural & Tech State University" ,
+            "North Dakota State University" ,
+            "North Dakota State University" ,
+            "Northwest Missouri State University" ,
+            "South Dakota School of Mines & technology" ,
+            "Southeastern University, DC" ,
+            "Southern Illinois University, Carbondale" ,
+            "Southern Oregon University, Ashland" ,
+            "St Cloud State University" ,
+            "State University of West Georgia" ,
+            "Suffolk University, MA" ,
+            "Texas A & M University, Commerce" ,
+            "Texas A & M university, Kingsville" ,
+            "University of Bridgeport –CT" ,
+            "University of Central Arkansas" ,
+            "University of Dayton –Ohio" ,
+            "University of Denver" ,
+            "University of Hawaii" ,
+            "University of Louisville" ,
+            "University of North Carolina, Greensboro" ,
+            "University of Texas at San Antonio" ,
+            "University of Texas El Paso" ,
+            "University of Texas, Tyler" ,
+            "University of West Florida, Pensacola" ,
+            "Western Kentucky University"};
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab3, container, false);
+
+        //create adapter and set it to listview
+        ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, universities7);
+        setListAdapter(adapter);
+
+        return rootView;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        // Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+        String pos = String.valueOf(getListAdapter().getItemId(position));
+
+        Log.e("possssssss", "" + pos);
+        Intent i = new Intent(getActivity(), Webview7.class);
+        i.putExtra("key", pos);
+        startActivity(i);
+    }
+
+}

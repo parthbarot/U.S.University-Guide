@@ -1,0 +1,229 @@
+package university_guide.com.university_guide;
+
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
+/**
+ * Created by dell on 11/8/2016.
+ */
+
+public class Webview7 extends AppCompatActivity implements View.OnClickListener {
+    WebView w7;
+    String urlid;
+    private LinearLayout mlLayoutRequestError = null;
+    private Handler mhErrorLayoutHide = null;
+
+    private boolean mbErrorOccured = false;
+    private boolean mbReloadPressed = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.webview7);
+        ((Button) findViewById(R.id.btnRetry)).setOnClickListener(this);
+        mlLayoutRequestError = (LinearLayout) findViewById(R.id.lLayoutRequestError);
+        mhErrorLayoutHide = getErrorLayoutHideHandler();
+        w7 = (WebView) findViewById(R.id.w7);
+        w7.getSettings().setJavaScriptEnabled(true);
+        urlid = String.valueOf(getIntent().getStringExtra("key"));
+        w7.setWebViewClient(new MyWebViewClient());
+        WebSettings settings = w7.getSettings();
+        settings.setJavaScriptEnabled(true);
+        w7.setWebChromeClient(getChromeClient());
+        // WebView.loadUrl(URL);
+
+        Log.e("key", "" + urlid);
+        if (urlid.equals("0")) {
+
+            w7.loadUrl("http://www.astate.edu/");
+        } else if (urlid.equals("1")) {
+            w7.loadUrl("http://www.bsu.edu");
+        }
+        else if (urlid.equals("2")){w7.loadUrl("http:www.boisestate.edu/");}
+        else if (urlid.equals("3")){w7.loadUrl("http:www.bradley.edu");}
+        else if (urlid.equals("4")){w7.loadUrl("http:www.csuchico.edu/");}
+        else if (urlid.equals("5")){w7.loadUrl("http:www.coloradotech.edu/");}
+        else if (urlid.equals("6")){w7.loadUrl("http:www.colstate.edu/");}
+        else if (urlid.equals("7")){w7.loadUrl("http:www.dsu.edu/");}
+        else if (urlid.equals("8")){w7.loadUrl("http:www.emich.edu/");}
+        else if (urlid.equals("9")){w7.loadUrl("http:www.nmsu.edu/");}
+        else if (urlid.equals("10")){w7.loadUrl("http:www.ewu.edu/");}
+        else if (urlid.equals("11")){w7.loadUrl("http:www.fiu.edu/");}
+        else if (urlid.equals("12")){w7.loadUrl("http:www.ilstu.edu/");}
+        else if (urlid.equals("13")){w7.loadUrl("http:www.lamar.edu/");}
+        else if (urlid.equals("14")){w7.loadUrl("http:www.marquette.edu/");}
+        else if (urlid.equals("15")){w7.loadUrl("http:www.mnsu.edu/");}
+        else if (urlid.equals("16")){w7.loadUrl("http:www.montana.edu/");}
+        else if (urlid.equals("17")){w7.loadUrl("http:www.nmt.edu/");}
+        else if (urlid.equals("18")){w7.loadUrl("http:www.nyit.edu/");}
+        else if (urlid.equals("19")){w7.loadUrl("http:www.ncat.edu/");}
+        else if (urlid.equals("20")){w7.loadUrl("http:www.nodak.edu/");}
+        else if (urlid.equals("21")){w7.loadUrl("http:www.ndsu.edu/");}
+        else if (urlid.equals("22")){w7.loadUrl("http:www.nwmissouri.edu/");}
+        else if (urlid.equals("23")){w7.loadUrl("http:www.sdsmt.edu/");}
+        else if (urlid.equals("24")){w7.loadUrl("http:www.seu.edu/");}
+        else if (urlid.equals("25")){w7.loadUrl("http:www.siuc.edu/");}
+        else if (urlid.equals("26")){w7.loadUrl("http:www.sou.edu/");}
+        else if (urlid.equals("27")){w7.loadUrl("http:www.stcloudstate.edu/");}
+        else if (urlid.equals("28")){w7.loadUrl("http:www.westga.edu/");}
+        else if (urlid.equals("29")){w7.loadUrl("http:www.suffolk.edu/");}
+        else if (urlid.equals("30")){w7.loadUrl("http:www.tamu-commerce.edu/");}
+        else if (urlid.equals("31")){w7.loadUrl("http:www.tamuk.edu/");}
+        else if (urlid.equals("32")){w7.loadUrl("http:www.bridgeport.edu/");}
+        else if (urlid.equals("33")){w7.loadUrl("http:www.uca.edu/");}
+        else if (urlid.equals("34")){w7.loadUrl("http:www.udayton.edu/");}
+        else if (urlid.equals("35")){w7.loadUrl("http:www.du.edu/");}
+        else if (urlid.equals("36")){w7.loadUrl("http:www.hawai.edu/");}
+        else if (urlid.equals("37")){w7.loadUrl("http:www.louisville.edu/");}
+
+        else if (urlid.equals("38")){w7.loadUrl("http:www.uncg.edu/");}
+        else if (urlid.equals("39")){w7.loadUrl("http:www.utsa.edu/");}
+        else if (urlid.equals("40")){w7.loadUrl("http:www.utep.edu/");}
+        else if (urlid.equals("41")){w7.loadUrl("http:www.uttyler.edu/");}
+        else if (urlid.equals("42")){w7.loadUrl("http:www.uwf.edu/");}
+        else if (urlid.equals("43")){w7.loadUrl("http:www.wku.edu/");}
+
+
+
+    }
+
+    private WebChromeClient getChromeClient() {
+        final ProgressDialog progressDialog = new ProgressDialog(Webview7.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+
+        return new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+            }
+        };
+    }
+
+    private Handler getErrorLayoutHideHandler() {
+        return new Handler() {
+            public void close() {
+
+            }
+
+            public void flush() {
+
+            }
+
+            public void publish(LogRecord record) {
+
+            }
+
+            //@Override
+            private void handleMessage(Message msg) {
+                mlLayoutRequestError.setVisibility(View.GONE);
+                // super.handleMessage(msg);
+            }
+        };
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (urlid.equals("0")) {
+
+            w7.loadUrl("http://www.astate.edu/");
+        } else if (urlid.equals("1")) {
+            w7.loadUrl("http://www.bsu.edu");
+        }
+        else if (urlid.equals("2")){w7.loadUrl("http:www.boisestate.edu/");}
+        else if (urlid.equals("3")){w7.loadUrl("http:www.bradley.edu");}
+        else if (urlid.equals("4")){w7.loadUrl("http:www.csuchico.edu/");}
+        else if (urlid.equals("5")){w7.loadUrl("http:www.coloradotech.edu/");}
+        else if (urlid.equals("6")){w7.loadUrl("http:www.colstate.edu/");}
+        else if (urlid.equals("7")){w7.loadUrl("http:www.dsu.edu/");}
+        else if (urlid.equals("8")){w7.loadUrl("http:www.emich.edu/");}
+        else if (urlid.equals("9")){w7.loadUrl("http:www.nmsu.edu/");}
+        else if (urlid.equals("10")){w7.loadUrl("http:www.ewu.edu/");}
+        else if (urlid.equals("11")){w7.loadUrl("http:www.fiu.edu/");}
+        else if (urlid.equals("12")){w7.loadUrl("http:www.ilstu.edu/");}
+        else if (urlid.equals("13")){w7.loadUrl("http:www.lamar.edu/");}
+        else if (urlid.equals("14")){w7.loadUrl("http:www.marquette.edu/");}
+        else if (urlid.equals("15")){w7.loadUrl("http:www.mnsu.edu/");}
+        else if (urlid.equals("16")){w7.loadUrl("http:www.montana.edu/");}
+        else if (urlid.equals("17")){w7.loadUrl("http:www.nmt.edu/");}
+        else if (urlid.equals("18")){w7.loadUrl("http:www.nyit.edu/");}
+        else if (urlid.equals("19")){w7.loadUrl("http:www.ncat.edu/");}
+        else if (urlid.equals("20")){w7.loadUrl("http:www.nodak.edu/");}
+        else if (urlid.equals("21")){w7.loadUrl("http:www.ndsu.edu/");}
+        else if (urlid.equals("22")){w7.loadUrl("http:www.nwmissouri.edu/");}
+        else if (urlid.equals("23")){w7.loadUrl("http:www.sdsmt.edu/");}
+        else if (urlid.equals("24")){w7.loadUrl("http:www.seu.edu/");}
+        else if (urlid.equals("25")){w7.loadUrl("http:www.siuc.edu/");}
+        else if (urlid.equals("26")){w7.loadUrl("http:www.sou.edu/");}
+        else if (urlid.equals("27")){w7.loadUrl("http:www.stcloudstate.edu/");}
+        else if (urlid.equals("28")){w7.loadUrl("http:www.westga.edu/");}
+        else if (urlid.equals("29")){w7.loadUrl("http:www.suffolk.edu/");}
+        else if (urlid.equals("30")){w7.loadUrl("http:www.tamu-commerce.edu/");}
+        else if (urlid.equals("31")){w7.loadUrl("http:www.tamuk.edu/");}
+        else if (urlid.equals("32")){w7.loadUrl("http:www.bridgeport.edu/");}
+        else if (urlid.equals("33")){w7.loadUrl("http:www.uca.edu/");}
+        else if (urlid.equals("34")){w7.loadUrl("http:www.udayton.edu/");}
+        else if (urlid.equals("35")){w7.loadUrl("http:www.du.edu/");}
+        else if (urlid.equals("36")){w7.loadUrl("http:www.hawai.edu/");}
+        else if (urlid.equals("37")){w7.loadUrl("http:www.louisville.edu/");}
+
+        else if (urlid.equals("38")){w7.loadUrl("http:www.uncg.edu/");}
+        else if (urlid.equals("39")){w7.loadUrl("http:www.utsa.edu/");}
+        else if (urlid.equals("40")){w7.loadUrl("http:www.utep.edu/");}
+        else if (urlid.equals("41")){w7.loadUrl("http:www.uttyler.edu/");}
+        else if (urlid.equals("42")){w7.loadUrl("http:www.uwf.edu/");}
+        else if (urlid.equals("43")){w7.loadUrl("http:www.wku.edu/");}
+
+
+
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String urlid) {
+            return super.shouldOverrideUrlLoading(view, urlid);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String urlid, Bitmap favicon) {
+            super.onPageStarted(view, urlid, favicon);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String urlid) {
+            super.onLoadResource(view, urlid);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String urlid) {
+            if (mbErrorOccured == false && mbReloadPressed) {
+                hideErrorLayout();
+                mbReloadPressed = false;
+            }
+
+            super.onPageFinished(view, urlid);
+        }
+
+        private void hideErrorLayout() {
+            //mhErrorLayoutHide.sendEmptyMessageDelayed(10000, 200);
+        }
+    }
+
+}

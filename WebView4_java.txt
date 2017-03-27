@@ -1,0 +1,188 @@
+package university_guide.com.university_guide;
+
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
+/**
+ * Created by dell on 11/8/2016.
+ */
+
+public class Webview4 extends AppCompatActivity implements View.OnClickListener {
+    WebView w4;
+    String urlid;
+    private LinearLayout mlLayoutRequestError = null;
+    private Handler mhErrorLayoutHide = null;
+
+    private boolean mbErrorOccured = false;
+    private boolean mbReloadPressed = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.webview4);
+        ((Button) findViewById(R.id.btnRetry)).setOnClickListener(this);
+        mlLayoutRequestError = (LinearLayout) findViewById(R.id.lLayoutRequestError);
+        mhErrorLayoutHide = getErrorLayoutHideHandler();
+        w4 = (WebView) findViewById(R.id.w4);
+        w4.getSettings().setJavaScriptEnabled(true);
+        urlid = String.valueOf(getIntent().getStringExtra("key"));
+        w4.setWebViewClient(new MyWebViewClient());
+        WebSettings settings = w4.getSettings();
+        settings.setJavaScriptEnabled(true);
+        w4.setWebChromeClient(getChromeClient());
+        // WebView.loadUrl(URL);
+
+        Log.e("key", "" + urlid);
+        if (urlid.equals("0")) {
+
+            w4.loadUrl("http://www.gwu.edu/");
+        } else if (urlid.equals("1")) {
+            w4.loadUrl("http://www.indiana.edu");
+        }
+        else if (urlid.equals("2")){w4.loadUrl("http:www.lsu.edu");}
+        else if (urlid.equals("3")){w4.loadUrl("http:www.mtu.edu/");}
+        else if (urlid.equals("4")){w4.loadUrl("http:www.ohiou.edu/");}
+        else if (urlid.equals("5")){w4.loadUrl("http:www.okstate.edu/");}
+        else if (urlid.equals("6")){w4.loadUrl("http:www.sunnysb.edu/");}
+        else if (urlid.equals("7")){w4.loadUrl("http:www.tulane.edu/");}
+        else if (urlid.equals("8")){w4.loadUrl("http:www.ucf.edu/");}
+        else if (urlid.equals("9")){w4.loadUrl("http:www.uconn.edu/");}
+        else if (urlid.equals("10")){w4.loadUrl("http:www.uga.edu/");}
+        else if (urlid.equals("11")){w4.loadUrl("http:www.uh.edu/");}
+        else if (urlid.equals("12")){w4.loadUrl("http:www.ku.edu/");}
+        else if (urlid.equals("13")){w4.loadUrl("http:www.uky.edu/");}
+        else if (urlid.equals("14")){w4.loadUrl("http:www.umaine.edu/");}
+        else if (urlid.equals("15")){w4.loadUrl("http:www.miami.edu/");}
+        else if (urlid.equals("16")){w4.loadUrl("http:www.umr.edu/");}
+        else if (urlid.equals("17")){w4.loadUrl("http:www.mizzou.edu/");}
+        else if (urlid.equals("18")){w4.loadUrl("http:www.unl.edu/");}
+        else if (urlid.equals("19")){w4.loadUrl("http:www.ou.edu/");}
+        else if (urlid.equals("20")){w4.loadUrl("http:www.sc.edu/");}
+        else if (urlid.equals("21")){w4.loadUrl("http:www.utk.edu/");}
+        else if (urlid.equals("22")){w4.loadUrl("http:www.utdallas.edu/");}
+        else if (urlid.equals("23")){w4.loadUrl("http:www.utah.edu/");}
+        else if (urlid.equals("24")){w4.loadUrl("http:www.wvu.edu/");}
+
+
+    }
+
+    private WebChromeClient getChromeClient() {
+        final ProgressDialog progressDialog = new ProgressDialog(Webview4.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+
+        return new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+            }
+        };
+    }
+
+    private Handler getErrorLayoutHideHandler() {
+        return new Handler() {
+            public void close() {
+
+            }
+
+            public void flush() {
+
+            }
+
+            public void publish(LogRecord record) {
+
+            }
+
+            //@Override
+            private void handleMessage(Message msg) {
+                mlLayoutRequestError.setVisibility(View.GONE);
+                // super.handleMessage(msg);
+            }
+        };
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (urlid.equals("0")) {
+
+            w4.loadUrl("http://www.gwu.edu/");
+        } else if (urlid.equals("1")) {
+            w4.loadUrl("http://www.indiana.edu");
+        }
+        else if (urlid.equals("2")){w4.loadUrl("http:www.lsu.edu");}
+        else if (urlid.equals("3")){w4.loadUrl("http:www.mtu.edu/");}
+        else if (urlid.equals("4")){w4.loadUrl("http:www.ohiou.edu/");}
+        else if (urlid.equals("5")){w4.loadUrl("http:www.okstate.edu/");}
+        else if (urlid.equals("6")){w4.loadUrl("http:www.sunnysb.edu/");}
+        else if (urlid.equals("7")){w4.loadUrl("http:www.tulane.edu/");}
+        else if (urlid.equals("8")){w4.loadUrl("http:www.ucf.edu/");}
+        else if (urlid.equals("9")){w4.loadUrl("http:www.uconn.edu/");}
+        else if (urlid.equals("10")){w4.loadUrl("http:www.uga.edu/");}
+        else if (urlid.equals("11")){w4.loadUrl("http:www.uh.edu/");}
+        else if (urlid.equals("12")){w4.loadUrl("http:www.ku.edu/");}
+        else if (urlid.equals("13")){w4.loadUrl("http:www.uky.edu/");}
+        else if (urlid.equals("14")){w4.loadUrl("http:www.umaine.edu/");}
+        else if (urlid.equals("15")){w4.loadUrl("http:www.miami.edu/");}
+        else if (urlid.equals("16")){w4.loadUrl("http:www.umr.edu/");}
+        else if (urlid.equals("17")){w4.loadUrl("http:www.mizzou.edu/");}
+        else if (urlid.equals("18")){w4.loadUrl("http:www.unl.edu/");}
+        else if (urlid.equals("19")){w4.loadUrl("http:www.ou.edu/");}
+        else if (urlid.equals("20")){w4.loadUrl("http:www.sc.edu/");}
+        else if (urlid.equals("21")){w4.loadUrl("http:www.utk.edu/");}
+        else if (urlid.equals("22")){w4.loadUrl("http:www.utdallas.edu/");}
+        else if (urlid.equals("23")){w4.loadUrl("http:www.utah.edu/");}
+        else if (urlid.equals("24")){w4.loadUrl("http:www.wvu.edu/");}
+
+
+
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String urlid) {
+            return super.shouldOverrideUrlLoading(view, urlid);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String urlid, Bitmap favicon) {
+            super.onPageStarted(view, urlid, favicon);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String urlid) {
+            super.onLoadResource(view, urlid);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String urlid) {
+            if (mbErrorOccured == false && mbReloadPressed) {
+                hideErrorLayout();
+                mbReloadPressed = false;
+            }
+
+            super.onPageFinished(view, urlid);
+        }
+
+        private void hideErrorLayout() {
+            //mhErrorLayoutHide.sendEmptyMessageDelayed(10000, 200);
+        }
+    }
+
+}

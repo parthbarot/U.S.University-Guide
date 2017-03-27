@@ -1,0 +1,76 @@
+package university_guide.com.university_guide;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.ListFragment;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+/**
+ * Created by dell on 11/10/2016.
+ */
+
+public class tab6 extends ListFragment {
+    String[] universities6={"Baylor University, Texas","California State University, Sacramento","Chicago State University","Clarkson University",
+            "East Carolina University",
+            "Idaho State University" ,
+            "Louisiana Tech. University",
+            "Missouri State University" ,
+            "New Jersey Institute of Technology",
+            "New Mexico State University" ,
+            "North Dakota State University",
+            "Northeastern University" ,
+            "Old Dominion University, Virginia",
+            "Pace University, NY" ,
+            "Portland state university",
+            "South Dakota State University",
+            "Southern Illinois University-Edwardsville",
+            "SUNY Institute of Technology" ,
+            "Texas Tech University" ,
+            "University of Alaska- Fairbanks",
+            "University of Illinois at Springfield",
+            "University of Mississippi" ,
+            "University of Missouri at St Louis",
+            "University of North Texas" ,
+            "University of Northern Iowa",
+            "University of Tampa" ,
+            "University of Tennessee Chattanooga",
+            "University of Texas-Arlington" ,
+            "University of Toledo" ,
+            "University of Tulsa" ,
+            "University of Vermont" ,
+            "Villanova University" ,
+            "Wayne State University" ,
+            "Wichita State University",
+            "Wright State University" ,
+            "Wright State University"};
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.tab3, container, false);
+
+        //create adapter and set it to listview
+        ListAdapter adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, universities6);
+        setListAdapter(adapter);
+
+        return rootView;
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        // Toast.makeText(getActivity(),getListView().getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+        String pos = String.valueOf(getListAdapter().getItemId(position));
+
+        Log.e("possssssss", "" + pos);
+        Intent i = new Intent(getActivity(), Webview6.class);
+        i.putExtra("key", pos);
+        startActivity(i);
+    }
+
+}

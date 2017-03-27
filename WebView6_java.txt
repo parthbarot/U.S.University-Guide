@@ -1,0 +1,213 @@
+package university_guide.com.university_guide;
+
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
+
+/**
+ * Created by dell on 11/8/2016.
+ */
+
+public class Webview6 extends AppCompatActivity implements View.OnClickListener {
+    WebView w6;
+    String urlid;
+    private LinearLayout mlLayoutRequestError = null;
+    private Handler mhErrorLayoutHide = null;
+
+    private boolean mbErrorOccured = false;
+    private boolean mbReloadPressed = false;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.webview6);
+        ((Button) findViewById(R.id.btnRetry)).setOnClickListener(this);
+        mlLayoutRequestError = (LinearLayout) findViewById(R.id.lLayoutRequestError);
+        mhErrorLayoutHide = getErrorLayoutHideHandler();
+        w6 = (WebView) findViewById(R.id.w6);
+        w6.getSettings().setJavaScriptEnabled(true);
+        urlid = String.valueOf(getIntent().getStringExtra("key"));
+        w6.setWebViewClient(new MyWebViewClient());
+        WebSettings settings = w6.getSettings();
+        settings.setJavaScriptEnabled(true);
+        w6.setWebChromeClient(getChromeClient());
+        // WebView.loadUrl(URL);
+
+        Log.e("key", "" + urlid);
+        if (urlid.equals("0")) {
+
+            w6.loadUrl("http://www.baylor.edu/");
+        } else if (urlid.equals("1")) {
+            w6.loadUrl("http://www.csus.edu");
+        }
+        else if (urlid.equals("2")){w6.loadUrl("http:www.csu.edu/");}
+        else if (urlid.equals("3")){w6.loadUrl("http:www.clarkson.edu");}
+        else if (urlid.equals("4")){w6.loadUrl("http:www.ecu.edu/");}
+        else if (urlid.equals("5")){w6.loadUrl("http:www.isu.edu/");}
+        else if (urlid.equals("6")){w6.loadUrl("http:www.latech.edu/");}
+        else if (urlid.equals("7")){w6.loadUrl("http:www.missouristate.edu/");}
+        else if (urlid.equals("8")){w6.loadUrl("http:www.njit.edu/");}
+        else if (urlid.equals("9")){w6.loadUrl("http:www.nmsu.edu/");}
+        else if (urlid.equals("10")){w6.loadUrl("http:www.ndsu.edu/");}
+        else if (urlid.equals("11")){w6.loadUrl("http:www.northeastern.edu/");}
+        else if (urlid.equals("12")){w6.loadUrl("http:www.odu.edu/");}
+        else if (urlid.equals("13")){w6.loadUrl("http:www.pace.edu/");}
+        else if (urlid.equals("14")){w6.loadUrl("http:www.pdx.edu/");}
+        else if (urlid.equals("15")){w6.loadUrl("http:www.sdsu.edu/");}
+        else if (urlid.equals("16")){w6.loadUrl("http:www.siue.edu/");}
+        else if (urlid.equals("17")){w6.loadUrl("http:www.sunyit.edu/");}
+        else if (urlid.equals("18")){w6.loadUrl("http:www.ttu.edu/");}
+        else if (urlid.equals("19")){w6.loadUrl("http:www.uaf.edu/");}
+        else if (urlid.equals("20")){w6.loadUrl("http:www.uis.edu/");}
+        else if (urlid.equals("21")){w6.loadUrl("http:www.olemiss.edu/");}
+        else if (urlid.equals("22")){w6.loadUrl("http:www.umsl.edu/");}
+        else if (urlid.equals("23")){w6.loadUrl("http:www.unt.edu/");}
+        else if (urlid.equals("24")){w6.loadUrl("http:www.uni.edu/");}
+        else if (urlid.equals("25")){w6.loadUrl("http:www.utampa.edu/");}
+        else if (urlid.equals("26")){w6.loadUrl("http:www.utc.edu/");}
+        else if (urlid.equals("27")){w6.loadUrl("http:www.uta.edu/");}
+        else if (urlid.equals("28")){w6.loadUrl("http:www.utoledo.edu/");}
+        else if (urlid.equals("29")){w6.loadUrl("http:www.utulsa.edu/");}
+        else if (urlid.equals("30")){w6.loadUrl("http:www.uvm.edu/");}
+        else if (urlid.equals("31")){w6.loadUrl("http:www.villanova.edu/");}
+        else if (urlid.equals("32")){w6.loadUrl("http:www.wayne.edu/");}
+        else if (urlid.equals("33")){w6.loadUrl("http:www.wichita.edu/");}
+        else if (urlid.equals("34")){w6.loadUrl("http:www.wright.edu/");}
+        else if (urlid.equals("35")){w6.loadUrl("http:www.wright.edu/");}
+
+
+
+
+
+    }
+
+    private WebChromeClient getChromeClient() {
+        final ProgressDialog progressDialog = new ProgressDialog(Webview6.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCancelable(false);
+
+        return new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+            }
+        };
+    }
+
+    private Handler getErrorLayoutHideHandler() {
+        return new Handler() {
+            public void close() {
+
+            }
+
+            public void flush() {
+
+            }
+
+            public void publish(LogRecord record) {
+
+            }
+
+            //@Override
+            private void handleMessage(Message msg) {
+                mlLayoutRequestError.setVisibility(View.GONE);
+                // super.handleMessage(msg);
+            }
+        };
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (urlid.equals("0")) {
+
+            w6.loadUrl("http://www.baylor.edu/");
+        } else if (urlid.equals("1")) {
+            w6.loadUrl("http://www.csus.edu");
+        }
+        else if (urlid.equals("2")){w6.loadUrl("http:www.csu.edu/");}
+        else if (urlid.equals("3")){w6.loadUrl("http:www.clarkson.edu");}
+        else if (urlid.equals("4")){w6.loadUrl("http:www.ecu.edu/");}
+        else if (urlid.equals("5")){w6.loadUrl("http:www.isu.edu/");}
+        else if (urlid.equals("6")){w6.loadUrl("http:www.latech.edu/");}
+        else if (urlid.equals("7")){w6.loadUrl("http:www.missouristate.edu/");}
+        else if (urlid.equals("8")){w6.loadUrl("http:www.njit.edu/");}
+        else if (urlid.equals("9")){w6.loadUrl("http:www.nmsu.edu/");}
+        else if (urlid.equals("10")){w6.loadUrl("http:www.ndsu.edu/");}
+        else if (urlid.equals("11")){w6.loadUrl("http:www.northeastern.edu/");}
+        else if (urlid.equals("12")){w6.loadUrl("http:www.odu.edu/");}
+        else if (urlid.equals("13")){w6.loadUrl("http:www.pace.edu/");}
+        else if (urlid.equals("14")){w6.loadUrl("http:www.pdx.edu/");}
+        else if (urlid.equals("15")){w6.loadUrl("http:www.sdsu.edu/");}
+        else if (urlid.equals("16")){w6.loadUrl("http:www.siue.edu/");}
+        else if (urlid.equals("17")){w6.loadUrl("http:www.sunyit.edu/");}
+        else if (urlid.equals("18")){w6.loadUrl("http:www.ttu.edu/");}
+        else if (urlid.equals("19")){w6.loadUrl("http:www.uaf.edu/");}
+        else if (urlid.equals("20")){w6.loadUrl("http:www.uis.edu/");}
+        else if (urlid.equals("21")){w6.loadUrl("http:www.olemiss.edu/");}
+        else if (urlid.equals("22")){w6.loadUrl("http:www.umsl.edu/");}
+        else if (urlid.equals("23")){w6.loadUrl("http:www.unt.edu/");}
+        else if (urlid.equals("24")){w6.loadUrl("http:www.uni.edu/");}
+        else if (urlid.equals("25")){w6.loadUrl("http:www.utampa.edu/");}
+        else if (urlid.equals("26")){w6.loadUrl("http:www.utc.edu/");}
+        else if (urlid.equals("27")){w6.loadUrl("http:www.uta.edu/");}
+        else if (urlid.equals("28")){w6.loadUrl("http:www.utoledo.edu/");}
+        else if (urlid.equals("29")){w6.loadUrl("http:www.utulsa.edu/");}
+        else if (urlid.equals("30")){w6.loadUrl("http:www.uvm.edu/");}
+        else if (urlid.equals("31")){w6.loadUrl("http:www.villanova.edu/");}
+        else if (urlid.equals("32")){w6.loadUrl("http:www.wayne.edu/");}
+        else if (urlid.equals("33")){w6.loadUrl("http:www.wichita.edu/");}
+        else if (urlid.equals("34")){w6.loadUrl("http:www.wright.edu/");}
+        else if (urlid.equals("35")){w6.loadUrl("http:www.wright.edu/");}
+
+
+
+    }
+
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String urlid) {
+            return super.shouldOverrideUrlLoading(view, urlid);
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String urlid, Bitmap favicon) {
+            super.onPageStarted(view, urlid, favicon);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String urlid) {
+            super.onLoadResource(view, urlid);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String urlid) {
+            if (mbErrorOccured == false && mbReloadPressed) {
+                hideErrorLayout();
+                mbReloadPressed = false;
+            }
+
+            super.onPageFinished(view, urlid);
+        }
+
+        private void hideErrorLayout() {
+            //mhErrorLayoutHide.sendEmptyMessageDelayed(10000, 200);
+        }
+    }
+
+}
